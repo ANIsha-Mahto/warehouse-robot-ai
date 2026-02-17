@@ -79,8 +79,6 @@ Video tracking:
 
     python -m venv venv
     .\venv\Scripts\activate   # Windows
-    # source venv/bin/activate # Linux/Mac
-
 
 3. Install dependencies:
 
