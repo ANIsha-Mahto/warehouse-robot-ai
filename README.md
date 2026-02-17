@@ -1,14 +1,14 @@
-Intelligent Object Recognition and Query System for Warehouse Robotics
+**Intelligent Object Recognition and Query System for Warehouse Robotics**
 
-Overview:-
+**Overview:-**
 
 This project is a prototype system for a warehouse robot that can:
 1. Identify and locate objects using its camera
 2. Classify objects into categories like fragile, heavy, and hazardous
 3. Retrieve relevant handling instructions using a Retrieval-Augmented Generation (RAG) system
-4. Optionally, track objects in video and overlay instructions
+4. Optionally, track objects in video and overlay instruction
 
-Part 1: Computer Vision Module 
+**Part 1: Computer Vision Module**
 Approach-
 
 Edge detection and contour analysis using OpenCV
@@ -26,7 +26,7 @@ Limitations:
     Difficulty with overlapping objects, poor lighting, or complex backgrounds
     Only detects structured objects (boxes, pallets) in this prototype
 
-Part 2: Machine Learning Module
+**Part 2: Machine Learning Module**
 
 Model: ResNet18 fine-tuned on a small warehouse dataset (~100 images)
 Classes: fragile, heavy, hazardous
@@ -38,7 +38,7 @@ Limitations:
     Model assumes cropped and centered objects
     Needs larger dataset and augmentation for production
 
-Part 3: RAG System
+**Part 3: RAG System**
 
 A small knowledge base with 10–15 documents:
 
@@ -52,7 +52,7 @@ Example queries:
     "How should the robot handle fragile items?"
     "What safety checks are needed before moving hazardous materials?"
 
-Part 4: Integration
+**Part 4: Integration**
 
 Combines CV, ML, and RAG components
 
@@ -68,7 +68,7 @@ Video tracking:
     Optional feature added using OpenCV’s CSRT tracker
     Tracks objects across multiple frames and overlays instructions dynamically
 
-Setup Instructions-
+**Setup Instructions-**
 
 1. Clone this repository:
 
@@ -96,7 +96,7 @@ Setup Instructions-
 
     results/ → output images/videos
 
-How to Run Each Component
+**How to Run Each Component-**
 
 Part 1 – Object Detection (images):
 
@@ -112,7 +112,7 @@ RAG System Query (interactive mode):
 
     python part3_rag/query_demo.py
 
-Dependencies-
+**Dependencies-**
 
     Python 3.13
     OpenCV (opencv-python or opencv-contrib-python)
@@ -122,7 +122,7 @@ Dependencies-
 
 (Exact versions in requirements.txt)
 
-Challenges Faced and Solutions-
+**Challenges Faced and Solutions-**
 
 1. Object detection in cluttered frames:
 
@@ -144,7 +144,7 @@ Challenges Faced and Solutions-
 
     Ensured query_rag returns string output (not tuple) to overlay on video
 
-Results-
+**Results-**
 
     Detected bounding boxes with center coordinates and dimensions
     Classified objects accurately
