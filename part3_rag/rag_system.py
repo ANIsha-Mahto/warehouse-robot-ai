@@ -1,95 +1,34 @@
 import os
-import faiss
-import numpy as np
-from sentence_transformers import SentenceTransformer
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores import FAISS
+from langchain.chains import RetrievalQA
+from langchain.llms import OpenAI
 
-# -----------------------------
-# Load embedding model
-# -----------------------------
-embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
-
-# -----------------------------
-# Load documents (Paragraph chunking)
-# -----------------------------
-docs_path = os.path.join(os.path.dirname(__file__), "..", "docs")
-docs_path = os.path.abspath(docs_path)
-
+# --- Step 1: Load documents ---
+docs_folder = r"part3_rag/docs"
 documents = []
-doc_sources = []
+for filename in os.listdir(docs_folder):
+    if filename.endswith(".txt"):
+        with open(os.path.join(docs_folder, filename), "r", encoding="utf-8") as f:
+            content = f.read()
+            documents.append(content)
 
-for file in os.listdir(docs_path):
-    if file.endswith(".txt"):
-        with open(os.path.join(docs_path, file), "r", encoding="utf-8") as f:
-            text = f.read()
-            paragraphs = text.split("\n")
+# --- Step 2: Split documents into chunks ---
+text_splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+chunks = []
+for doc in documents:
+    chunks.extend(text_splitter.split_text(doc))
 
-            for para in paragraphs:
-                chunk = para.strip()
-                if len(chunk) > 30:
-                    documents.append(chunk)
-                    doc_sources.append(file)
+# --- Step 3: Embed and store in FAISS ---
+embeddings = OpenAIEmbeddings()
+vectorstore = FAISS.from_texts(chunks, embeddings)
 
-print("Total chunks created:", len(documents))
+# --- Step 4: Create retrieval QA chain ---
+qa = RetrievalQA.from_chain_type(llm=OpenAI(temperature=0),
+                                 chain_type="stuff",
+                                 retriever=vectorstore.as_retriever(search_kwargs={"k":3}))
 
-# -----------------------------
-# Create embeddings + FAISS index
-# -----------------------------
-embeddings = embedding_model.encode(documents)
-
-dimension = embeddings.shape[1]
-index = faiss.IndexFlatL2(dimension)
-index.add(np.array(embeddings))
-
-
-# -----------------------------
-# RAG Query Function (No Generator)
-# -----------------------------
-def query_rag(question, k=3):
-
-    question_lower = question.lower()
-
-    keyword_matches = []
-    keyword_sources = []
-
-    # 1️⃣ Keyword filtering
-    for doc, source in zip(documents, doc_sources):
-        if any(word in doc.lower() for word in question_lower.split()):
-            keyword_matches.append(doc)
-            keyword_sources.append(source)
-
-    if keyword_matches:
-        retrieved_chunks = keyword_matches[:k]
-        source_file = keyword_sources[0]
-    else:
-        # 2️⃣ Semantic fallback
-        question_embedding = embedding_model.encode([question])
-        D, I = index.search(np.array(question_embedding), k)
-        retrieved_chunks = [documents[i] for i in I[0]]
-        source_file = doc_sources[I[0][0]]
-
-    print("\nRetrieved Chunks:")
-    for chunk in retrieved_chunks:
-        print("----")
-        print(chunk)
-
-    # Direct structured response (no LLM generation)
-    answer = "\n".join([f"- {chunk.strip()}" for chunk in retrieved_chunks])
-
-    return answer, source_file
-
-
-# -----------------------------
-# Main Loop
-# -----------------------------
-if __name__ == "__main__":
-    while True:
-        user_query = input("Ask a question (or type 'exit'): ")
-
-        if user_query.lower() == "exit":
-            break
-
-        answer, source = query_rag(user_query)
-
-        print("\nResponse:\n")
-        print(answer)
-        print(f"\n(Source: {source})\n")
+# --- Step 5: Query function ---
+def query_rag(question):
+    return qa.run(question)
