@@ -1,0 +1,6 @@
+Stacking must follow weight hierarchy rules.
+Heavy items must always be placed at the bottom.
+Fragile items should never be stacked beneath heavy objects.
+Maintain stable alignment to prevent tilting.
+Maximum stacking height should not exceed 1.8 meters.
+Ensure load balance before transport.

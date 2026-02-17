@@ -1,0 +1,6 @@
+The robot must operate only if battery level exceeds 30%.
+Low battery warning triggers at 25% capacity.
+Charging cycles should not exceed recommended voltage limits.
+Avoid operating under extreme temperatures.
+Battery health should be monitored weekly.
+Automatic return-to-charging mode activates below 20%.

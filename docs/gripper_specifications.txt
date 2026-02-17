@@ -1,0 +1,3 @@
+The robotic gripper maximum weight capacity is 25 kilograms.
+Grip pressure can be dynamically adjusted between 10% and 100%.
+The gripper includes slip detection sensors.

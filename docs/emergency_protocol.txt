@@ -1,0 +1,6 @@
+In case of system malfunction, activate emergency stop immediately.
+The robot must shut down movement if obstacle sensors fail.
+Alert notifications should be sent to the warehouse control system.
+Hazardous material transport must halt during fire alarms.
+Manual override mode should be enabled for technician access.
+Perform full system diagnostics before resuming operation.

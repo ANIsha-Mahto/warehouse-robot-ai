@@ -1,0 +1,4 @@
+Hazardous materials must be transported in sealed containers.
+Safety protocol requires environmental monitoring before transport.
+Robots must avoid high temperature zones when handling flammable materials.
+Emergency shutdown must be enabled during hazardous transport.

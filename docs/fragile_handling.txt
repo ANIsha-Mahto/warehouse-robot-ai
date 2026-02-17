@@ -1,0 +1,4 @@
+Fragile items must be handled with reduced gripper pressure. 
+The robotic arm should move at low speed to avoid vibration.
+Avoid sudden acceleration and deceleration.
+Fragile packages must not be stacked under heavy loads.

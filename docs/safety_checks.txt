@@ -1,0 +1,4 @@
+Before operation, verify battery level above 40%.
+Check obstacle sensors and camera calibration.
+Emergency stop system must be functional.
+Ensure navigation system is active.

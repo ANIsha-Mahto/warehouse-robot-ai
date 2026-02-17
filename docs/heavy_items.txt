@@ -1,0 +1,4 @@
+Heavy objects require full grip force activation.
+Ensure weight does not exceed the robotic arm capacity of 25kg.
+Lift heavy items slowly and maintain balance.
+Always verify load distribution before movement.

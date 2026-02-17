@@ -1,0 +1,6 @@
+The robot must follow predefined warehouse navigation paths.
+Speed should not exceed 1.5 meters per second in active zones.
+Obstacle detection sensors must remain active at all times.
+Maintain a minimum distance of 0.5 meters from human workers.
+Avoid sharp turns while carrying heavy or fragile loads.
+Navigation system must recalibrate if path obstruction occurs.
