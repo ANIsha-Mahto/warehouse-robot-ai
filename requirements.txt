@@ -1,0 +1,18 @@
+# Required packages for Warehouse Robot AI project
+
+# Core RAG / LangChain
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-huggingface>=0.1.0
+langchain-groq>=0.2.0
+faiss-cpu>=1.8.0
+python-dotenv>=1.0.1
+sentence-transformers>=3.0.0
+
+# CV / ML dependencies (existing)
+opencv-python
+numpy==1.26.4
+torch
+torchvision
+scikit-learn
+Pillow
