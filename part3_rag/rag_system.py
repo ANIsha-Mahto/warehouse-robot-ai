@@ -32,3 +32,5 @@ qa = RetrievalQA.from_chain_type(llm=OpenAI(temperature=0),
 # --- Step 5: Query function ---
 def query_rag(question):
     return qa.run(question)
+
+# // fixing the changes
