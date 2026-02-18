@@ -53,7 +53,7 @@ from langchain_groq import ChatGroq
 # ---------------------------------------------------------------------------
 DOCS_FOLDER = _PROJECT_ROOT / "docs"
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-LLM_MODEL = "openai/gpt-oss-120b"            # Groq-hosted model
+LLM_MODEL = "openai/gpt-oss-120b"          
 CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50
 
@@ -151,7 +151,6 @@ if __name__ == "__main__":
     test_questions = [
         "How should I handle fragile items in the warehouse?",
         "What are the safety protocols for hazardous materials?",
-        "What is the maximum weight the gripper can hold?",
     ]
     for q in test_questions:
         print(f"\nQ: {q}")
